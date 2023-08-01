@@ -9,12 +9,21 @@ const otherForm4Element = document.getElementById("otherForm4");
 const verbMeaningElement = document.getElementById("verbMeaning");
 const sessionStatsElement = document.getElementById("sessionStats");
 
+const allForms = [ 
+  {name:"teForm", val:"Vて"},
+  {name:"masuForm", val:"Vます"},
+  {name:"taForm", val:"Vた"},
+  {name:"naiForm", val:"Vない"},
+  {name:"dictionaryForm", val:"Vる"},
+]
+
 let currentVerbIndex = 0;
 let correctAnswers = 0;
 let totalAttempts = 0;
 
 const verbsData = JSON.parse(verbsDataJSON);
 let cachedVerbData = null;
+let cachedOrgForm = null;
 
 function displayRandomVerb() {
   if (verbsData.length === 0) {
@@ -22,13 +31,17 @@ function displayRandomVerb() {
   }
 
   const randomVerb = verbsData[Math.floor(Math.random() * verbsData.length)];
-    cachedVerbData = randomVerb;
+  cachedVerbData = randomVerb;
 
-  const forms = ["Vて", "Vます", "Vた", "Vない"];
-  const randomForm = forms[Math.floor(Math.random() * forms.length)];
+  //const forms = ["Vて", "Vます", "Vた", "Vない"];
+  const randomForm = allForms[Math.floor(Math.random() * allForms.length)];
+  var orgForm = allForms[Math.floor(Math.random() * allForms.length)];
+  while(orgForm.name == randomForm.name)
+    orgForm = allForms[Math.floor(Math.random() * allForms.length)];
+  cachedOrgForm = orgForm.name;
 
-  targetVerbElement.textContent = `${randomVerb.dictionaryForm} (${randomVerb.pronunciation})`;
-  targetFormElement.textContent = randomForm;
+  targetVerbElement.textContent = `${randomVerb[orgForm.name]} (${randomVerb.pronunciation})`;
+  targetFormElement.textContent = randomForm.val;
 
   answerInputElement.value = "";
   resultMessageElement.textContent = "";
@@ -80,7 +93,7 @@ function getCorrectAnswer() {
   const displayedVerb = targetVerbElement.textContent.split(" ")[0]; 
   const displayedForm = targetFormElement.textContent;
   
-  const verb = verbsData.find(v => v.dictionaryForm === displayedVerb);
+  const verb = verbsData.find(v => v[cachedOrgForm] === displayedVerb);
   
   switch (displayedForm) {
     case "Vて":
@@ -91,6 +104,8 @@ function getCorrectAnswer() {
       return verb.taForm;
     case "Vない":
       return verb.naiForm;
+    case "Vる":
+      return verb.dictionaryForm;
     default:
       return "";
   }
