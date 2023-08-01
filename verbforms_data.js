@@ -2,7 +2,7 @@ const verbsDataJSON = `
 [
   {
     "dictionaryForm": "見る",
-    "pronunciation": "みる",
+    "pronunciation": "み",
     "masuForm": "見ます",
     "teForm": "見て",
     "taForm": "見た",
@@ -11,7 +11,7 @@ const verbsDataJSON = `
   },
   {
     "dictionaryForm": "食べる",
-    "pronunciation": "たべる",
+    "pronunciation": "たべ",
     "masuForm": "食べます",
     "teForm": "食べて",
     "taForm": "食べた",
