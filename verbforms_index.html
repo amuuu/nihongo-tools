@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>Japanese Verb Forms Conversion Quiz!</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .small-input {
+      width: 40%;
+    }
+
+  .form-control {
+    display: inline-block;
+  }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <h4 class="this-session-stats" id="sessionStats"></h4>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="text-center">
+        <button class="btn btn-xs btn-default" id="nextVerbButton">スキップ</button>
+        <button class="btn btn-xs btn-default" data-toggle="modal" data-target="#helpModal">Help</button>
+        
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p style="font-size: medium;">
+                - Type the verb with kanji, not hiragana or katakana. <br>
+                - After answering each verb, a new question will be asked after a few seconds. <br>
+                - You can also skip a question if you want to. <br>
+                - The score is merely for aesthetics and personal challenge. <br>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h4><span class="target" id="targetVerb"></span><span class="target-pronounce"></span><span class="text-center" style="padding-left:2%;padding-right:2%;">➡️</span><span class="target-form" id="targetForm"></span></h4>
+        </div>
+
+        <form id="answerForm">
+          <div class="form-group">
+            <input type="text" class="form-control small-input" id="answer" placeholder="アンサー">
+          </div>
+          <button type="submit" class="btn btn-primary">ゴー！</button>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <h2 id="resultMessage"></h2>
+        <p style="font-size: larger;">
+          <span class="other-form-1" id="otherForm1"></span>
+          <br>
+          <span class="other-form-2" id="otherForm2"></span>
+          <br>
+          <span class="other-form-3" id="otherForm3"></span>
+          <br>
+          <span class="other-form-4" id="otherForm4"></span>
+          <br>
+          <span class="meaning" id="verbMeaning"></span>
+          
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="verbforms_data.js"></script>
+  <script src="verbforms_script.js"></script>
+  <script>
+    displayRandomVerb();
+  </script>
+</body>
+</html>
